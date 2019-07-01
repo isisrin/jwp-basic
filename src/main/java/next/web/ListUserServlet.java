@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import core.db.DataBase;
+import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/user/list")
+@Slf4j
 public class ListUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
