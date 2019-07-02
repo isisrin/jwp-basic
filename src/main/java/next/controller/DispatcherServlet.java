@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @WebServlet(urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
@@ -28,10 +29,13 @@ public class DispatcherServlet extends HttpServlet {
 
     @SneakyThrows
     private void test(HttpServletRequest req, HttpServletResponse resp) {
-        Controller huhu = RequestMapping.getMatchedController(req.getRequestURI());
-        log.info("감증... {} ", huhu);
-        String hoho = RequestMapping.getMatchedController(req.getRequestURI()).service(req, resp);
-        log.info("제발요 엄마 {}",hoho);
+        String requestURI = req.getRequestURI();
+        Controller huhu = RequestMapping.getMatchedController(requestURI);
+        if(huhu == null) {
+            resp.sendRedirect(requestURI);
+            return;
+        }
+        String hoho = RequestMapping.getMatchedController(requestURI).service(req, resp);
         if(hoho.contains(".jsp")) {
             RequestDispatcher rd = req.getRequestDispatcher(hoho);
             rd.forward(req, resp);
