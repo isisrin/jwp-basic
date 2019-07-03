@@ -2,6 +2,12 @@
 
 #### 알게 된 것
 
+##### DispatcherServlet 패턴?
+->DispatcherServlet 에서 servlect관련 중복 코드를 담당하고 있다. <br/>
+ ex) servlet을 extends 한 곳에서 호출하는 httpResponse.sendRedirect()나 fortward() 함수 <br/>
+ 지금처럼 DispatcherServlet이 모든 controller로 가기전에 선 처리 하는 방식이 'front controller pattern' 프론트 컨트롤러 패턴이라고 한다!
+ Spring MVC 프레임워크가 이와 비슷하게 동작한다고 한다.
+
 ##### @WebServlet(loadOnStartup = 1) 
 -> loadOnStartup을 설정하지 않으면 서블릿 인스턴스를 생성하는 init() 메소드를 클라이언트 요청이 발생하는 시점에 실행된다.
 loadOnStartup을 설정하면 서블릿 컨테이너가 시작하는 시점에 init() 메소드를 실행한다.
